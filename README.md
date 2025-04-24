@@ -31,11 +31,12 @@ A RESTful API built with **Express** and **MongoDB** for managing student and do
     ```bash
     npm install
 4.Set up environment variables: Create a .env file in the root of the project and add the following:
-    ```bash
-    MONGO_URI=your_mongo_database_uri
-    PORT=your_preferred_port (e.g., 3000)
+   ```bash
+   MONGO_URI=your_mongo_database_uri
+   PORT=your_preferred_port (e.g., 3000)
+```
 
-##Running the Project
+## Running the Project
 1. Start the server:
      ```bash
        npm start
