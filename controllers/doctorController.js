@@ -21,4 +21,27 @@ const ChangeNameDoctor = async (req, res) => {
   }
 };
 
-module.exports = ChangeNameDoctor;
+const createDoctorWithQueryParams = async (req, res) => {
+  try {
+    const { name, age, phone } = req.query;
+
+    if (!name || !age || !phone) {
+      return res.status(400).json({ message: 'Please provide a doctor name in the query parameters.' });
+    }
+
+    const newDoctor = new Doctor({
+      name,
+      age,
+      phone
+    });
+
+    await newDoctor().save()
+
+    res.status(201).json({ message: 'Doctor created successfully', doctor: newDoctor });
+  } catch (error) {
+    console.error('Error creating doctor:', error);
+    res.status(500).json({ message: 'Failed to create doctor' });
+  }
+};
+
+module.exports = {ChangeNameDoctor, createDoctorWithQueryParams};
