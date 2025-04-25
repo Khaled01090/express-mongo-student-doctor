@@ -2,14 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const studentRoutes = require('./routes/studentRoutes');
-const doctorRouter = require("./routes/doctorRouter");
+const doctorRoutes = require("./routes/doctorRoutes");
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/student', studentRoutes);
-app.use("/doctor", doctorRouter);
+app.use("/doctor", doctorRoutes);
 
 const connectDB = require("./config/db");
 connectDB();
