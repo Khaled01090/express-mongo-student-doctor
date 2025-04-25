@@ -1,6 +1,6 @@
 const Student = require('../models/Student');
 
-exports.createStudentHardcoded = (req, res) => {
+const createStudentHardcoded = (req, res) => {
     const student = {
         name: "Ahmed Ali",
         age: 22,
@@ -13,7 +13,7 @@ exports.createStudentHardcoded = (req, res) => {
     });
 };
 
-exports.createStudentFromBody = (req, res) => {
+const createStudentFromBody = (req, res) => {
     const { name, age, major } = req.body;
 
     if (!name || !age || !major) {
@@ -28,7 +28,7 @@ exports.createStudentFromBody = (req, res) => {
     });
 };
 
-exports.getAllStudents = async (req, res) => {
+const getAllStudents = async (req, res) => {
     try {
         const students = await Student.find();
         res.status(200).json({
@@ -40,7 +40,7 @@ exports.getAllStudents = async (req, res) => {
     }
 };
 
-exports.getStudentById = async (req, res) => {
+const getStudentById = async (req, res) => {
     try {
         const id = req.params.id;
         const student = await Student.findById(id);
