@@ -1,31 +1,42 @@
 const Student = require('../models/Student');
 
-const createStudentHardcoded = (req, res) => {
-    const student = {
-        name: "Ahmed Ali",
-        age: 22,
-        major: "Computer Science"
-    };
+const createStudentHardcoded = async (req, res) => {
+    try {
+        const student = new Student({
+            name: "Ahmed Ali",
+            age: 22,
+            major: "Computer Science"
+        });
 
-    res.status(201).json({
-        message: "Student created (hardcoded)",
-        student
-    });
+        const savedStudent = await student.save();
+
+        res.status(201).json({
+            message: "Student created (hardcoded)",
+            student: savedStudent
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Error creating student", error: error.message });
+    }
 };
 
-const createStudentFromBody = (req, res) => {
+const createStudentFromBody = async (req, res) => {
     const { name, age, major } = req.body;
 
     if (!name || !age || !major) {
         return res.status(400).json({ message: "Missing fields" });
     }
 
-    const student = { name, age, major };
+    try {
+        const student = new Student({ name, age, major });
+        const savedStudent = await student.save();
 
-    res.status(201).json({
-        message: "Student created from body",
-        student
-    });
+        res.status(201).json({
+            message: "Student created from body",
+            student: savedStudent
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Error creating student", error: error.message });
+    }
 };
 
 const getAllStudents = async (req, res) => {
