@@ -26,7 +26,7 @@ const createDoctorWithQueryParams = async (req, res) => {
     const { name, age, phone } = req.query;
 
     if (!name || !age || !phone) {
-      return res.status(400).json({ message: 'Please provide a doctor name in the query parameters.' });
+      return res.status(400).json({ message: 'Please provide name, age, and phone in the query parameters.' });
     }
 
     const newDoctor = new Doctor({
@@ -35,7 +35,7 @@ const createDoctorWithQueryParams = async (req, res) => {
       phone
     });
 
-    await newDoctor().save()
+    await newDoctor.save()
 
     res.status(201).json({ message: 'Doctor created successfully', doctor: newDoctor });
   } catch (error) {
